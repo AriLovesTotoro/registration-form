@@ -666,16 +666,8 @@
                  </div>
                  <div class="col-md-6 mb-3">
                    <label class="form-label required">Тоглох байрлал</label>
-                   <select name="player_position_${playerIndex}" class="form-select" required>
-                     <option value="">Сонгох</option>
-                     <option value="Point Guard">Point Guard</option>
-                     <option value="Shooting Guard">Shooting Guard</option>
-                     <option value="Small Forward">Small Forward</option>
-                     <option value="Power Forward">Power Forward</option>
-                     <option value="Center">Center</option>
-                     <option value="Bench Player">Bench Player</option>
-                   </select>
-                 </div>
+                   <input type="text" name="player_position_${playerIndex}" class="form-select" required>
+                  </div>
                </div>`;
 
       playerDiv.innerHTML = html;
