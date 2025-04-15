@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Европ дахь монголчуудын волейболын аварга шалгаруулаx Мастер 2025 шилжин явах цомын анх дугаар тэмцээний мэдүүлэг.</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.30.0/tabler-icons.min.css">
+  
+  <style>
+    /* Global scaling - increases all elements by 10% */
+    html {
+      font-size: 110%; /* Base increase of 10% */
+    }
+    
+    :root {
+      --tblr-primary: #206bc4;
+      --tblr-primary-rgb: 32, 107, 196;
+    }
+    
+    body {
+      background-color: #f5f7fb;
+    }
+    
+    /* Mobile date input styling */
+    .date-input-group {
+      position: relative;
+    }
+    
+    .text-date-input {
+      width: 100%;
+      height: 45px;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--tblr-border-color);
+      border-radius: 4px;
+      font-size: 1rem;
+      background-color: #fff;
+      transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    
+    .text-date-input:focus {
+      border-color: var(--tblr-primary);
+      box-shadow: 0 0 0 0.2rem rgba(var(--tblr-primary-rgb), 0.25);
+      outline: none;
+    }
+    
+    .text-date-input.is-invalid {
+      border-color: var(--tblr-danger);
+    }
+    
+    .hidden-date {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    /* Container styling */
+    .container-custom {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0;
+    }
+    
+    /* Form layout */
+    .card {
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.05);
+    }
+    
+    .card-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--tblr-border-color);
+      background-color: transparent;
+    }
+    
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    .card-title {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+    
+    .form-section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--tblr-border-color);
+    }
+    
+    /* Form elements */
+    .form-label {
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    
+    .form-label.required:after {
+      content: " *";
+      color: var(--tblr-danger);
+    }
+    
+    .form-control, .form-select {
+      padding: 0.5rem 0.75rem;
+    }
+    
+    /* Form help text */
+    .form-text {
+      color: var(--tblr-muted);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    
+    /* Error messages */
+    .error-message {
+      color: var(--tblr-danger);
+      font-size: 0.8125rem;
+      margin-top: 0.25rem;
+      display: block;
+    }
+    
+    /* Player section */
+    .player-section {
+      background: rgba(var(--tblr-primary-rgb), 0.03);
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+      border: 1px solid var(--tblr-border-color);
+      border-radius: 4px;
+      position: relative;
+    }
+    
+    .player-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    /* Phone field container */
+    .phone-field-container {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .input-group .form-select {
+      max-width: 140px;
+    }
+    
+    /* Password requirements */
+    .password-requirement {
+      font-size: 0.8125rem;
+      color: var(--tblr-muted);
+      margin-top: 0.5rem;
+    }
+    
+    /* Fixed narrower width for short-field */
+    .short-field {
+      width: 350px;
+      margin: 0 auto 1rem auto;
+    }
+    
+    /* Footer button group */
+    .form-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--tblr-border-color);
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 576px) {
+      .container-custom {
+        padding: 0 0.5rem;
+        margin: 1rem auto;
+        width: 100%;
+      }
+      
+      .card-body {
+        padding: 1rem;
+      }
+      
+      .short-field {
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .form-control, .form-select {
+        font-size: 16px; /* Prevents iOS zoom */
+      }
+      
+      .player-section {
+        padding: 1rem;
+      }
+    }
+    
+    /* Add date input styling consistency */
+    input[type="date"].form-control {
+      font-family: inherit;
+      font-size: 0.875rem !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      height: auto;
+    }
+    
+    /* Add this new CSS for date input placeholders */
+    input[name^="player_dob_"]::placeholder,
+    input[id^="hidden_date_"]::placeholder,
+    input[id^="text_date_"]::placeholder {
+      font-size: 0.875rem !important;
+      opacity: 0.7;
+    }
+    
+    /* Ensure hidden date inputs don't affect styling */
+    input.hidden-date {
+      font-size: 0.875rem !important;
+    }
+    
+    /* Ensure consistent display on iOS */
+  </style>
+  <script>
+    let accountEmailValid = true;
+    let playerIndex = 0;
+
+    function createErrorDiv(parent) {
+      // Special case for phone field
+      if (parent.classList.contains('input-group')) {
+        // If parent is an input-group, find the phone-field-container
+        const container = parent.closest('.phone-field-container');
+        if (container) {
+          // Check if error already exists
+          let existingError = document.getElementById('phone_error_container');
+          if (existingError) {
+            return existingError;
+          }
+          // Create new error container
+          const errorDiv = document.createElement("div");
+          errorDiv.id = "phone_error_container";
+          errorDiv.className = "error-message";
+          container.appendChild(errorDiv);
+          return errorDiv;
+        }
+      }
+      
+      // Regular error creation for other fields
+      const errorDiv = document.createElement("div");
+      errorDiv.className = "error-message";
+      parent.appendChild(errorDiv);
+      return errorDiv;
+    }
+
+    // Simple function to setup date input validation
+    function setupDateInputs() {
+      document.querySelectorAll('input[name^="player_dob_"]').forEach(input => {
+        // Remove any lang attribute if it exists (important fix)
+        if (input.hasAttribute('lang')) {
+          input.removeAttribute('lang');
+        }
+        
+        // Ensure consistent styling
+        input.style.fontSize = '0.875rem'; 
+        
+        // Format input as user types
+        input.addEventListener('input', function() {
+          // Allow only numbers and slashes
+          this.value = this.value.replace(/[^\d\/]/g, '');
+          
+          // Auto-add slashes after day and month
+          if (this.value.length === 2 && !this.value.includes('/')) {
+            this.value += '/';
+          } else if (this.value.length === 5 && this.value.charAt(2) === '/' && !this.value.includes('/', 3)) {
+            this.value += '/';
+          }
+        });
+      });
+    }
+    
+    function validateTextDate(textInput, dateInput) {
+      // Remove any existing error messages
+      const parent = textInput.parentNode;
+      let errorMsg = parent.querySelector('.error-message');
+      if (!errorMsg) {
+        errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message';
+        parent.appendChild(errorMsg);
+      }
+      
+      // Clear error styling
+      textInput.classList.remove('is-invalid');
+      errorMsg.textContent = '';
+      
+      if (!textInput.value) {
+        if (dateInput.required) {
+          textInput.classList.add('is-invalid');
+          errorMsg.textContent = 'Төрсөн огноо оруулна уу';
+          return false;
+        }
+        dateInput.value = '';
+        return true;
+      }
+      
+      // Parse date (DD/MM/YYYY)
+      const parts = textInput.value.split('/');
+      if (parts.length !== 3) {
+        textInput.classList.add('is-invalid');
+        errorMsg.textContent = 'Огноог "DD/MM/YYYY" форматаар оруулна уу';
+        return false;
+      }
+      
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1; // JS months are 0-indexed
+      const year = parseInt(parts[2], 10);
+      
+      // Basic validation
+      if (isNaN(day) || isNaN(month) || isNaN(year) || 
+          day < 1 || day > 31 || month < 0 || month > 11 || 
+          year < 1920 || year > new Date().getFullYear()) {
+        textInput.classList.add('is-invalid');
+        errorMsg.textContent = 'Буруу огноо оруулсан байна';
+        return false;
+      }
+      
+      // Create date object for additional validation
+      const date = new Date(year, month, day);
+      
+      // Check if date is valid (handles months with fewer days)
+      if (date.getDate() !== day || date.getMonth() !== month || date.getFullYear() !== year) {
+        textInput.classList.add('is-invalid');
+        errorMsg.textContent = 'Буруу огноо оруулсан байна';
+        return false;
+      }
+      
+      // Check if date is within range
+      const today = new Date();
+      const minDate = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+      
+      if (date > today) {
+        textInput.classList.add('is-invalid');
+        errorMsg.textContent = 'Ирээдүйн огноо оруулах боломжгүй';
+        return false;
+      }
+      
+      if (date < minDate) {
+        textInput.classList.add('is-invalid');
+        errorMsg.textContent = 'Буруу огноо оруулсан байна';
+        return false;
+      }
+      
+      // Update the hidden date input with ISO format
+      const formattedMonth = String(month + 1).padStart(2, '0');
+      const formattedDay = String(day).padStart(2, '0');
+      dateInput.value = `${year}-${formattedMonth}-${formattedDay}`;
+      
+      return true;
+    }
+
+    // 1) Phone prefix data (added Switzerland => +41)
+    const phonePrefixes = {
+      "Austria": "+43","Belgium": "+32","France": "+33","Germany": "+49","Hungary": "+36",
+      "Italy": "+39","Luxembourg": "+352","Netherlands": "+31","Poland": "+48",
+      "Spain": "+34","Sweden": "+46","Switzerland": "+41","Czech Republic": "+420","Denmark": "+45"
+    };
+
+    function populatePhonePrefixes() {
+      const prefixSelect = document.getElementById('phone_prefix');
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '';
+      defaultOption.textContent = 'Select';
+      prefixSelect.appendChild(defaultOption);
+
+      // Sort by country name
+      const sorted = Object.entries(phonePrefixes).sort((a,b) => a[0].localeCompare(b[0]));
+      for (const [country, code] of sorted) {
+        const opt = document.createElement('option');
+        opt.value = code;
+        opt.textContent = `${country} (${code})`;
+        prefixSelect.appendChild(opt);
+      }
+      const otherOption = document.createElement('option');
+      otherOption.value = 'Other';
+      otherOption.textContent = 'Other';
+      prefixSelect.appendChild(otherOption);
+    }
+    function updatePhonePrefix() {
+      const prefixSelect = document.getElementById('phone_prefix');
+      const phoneField   = document.getElementById('contact_phone_input');
+      if (!prefixSelect.value || prefixSelect.value === 'Other') {
+        phoneField.placeholder = "";
+      } else {
+        phoneField.placeholder = prefixSelect.value;
+      }
+    }
+    function validatePhone() {
+      const phoneField = document.getElementById("contact_phone_input");
+      const value = phoneField.value.trim();
+      
+      // Find the dedicated error container
+      const errorDiv = document.getElementById("phone_error_container");
+      
+      let cleaned = value.replace(/\D/g, '');
+      if (cleaned !== value) {
+          phoneField.value = cleaned;
+      }
+      
+      if (cleaned === '') {
+          errorDiv.textContent = "Утасны дугаар оруулна уу";
+          phoneField.style.border = "1px solid var(--tblr-danger)";
+          return false;
+      }
+      if (cleaned.length < 8) {
+          errorDiv.textContent = "Утасны дугаар хамгийн багадаа 8 оронтой байх ёстой";
+          phoneField.style.border = "1px solid var(--tblr-danger)";
+          return false;
+      }
+      
+      errorDiv.textContent = "";
+      phoneField.style.border = "";
+      return true;
+    }
+
+    // 2) Countries & Cities (added Switzerland)
+    const citiesByCountry = {
+      "Austria": ["Vienna","Graz","Linz","Salzburg","Innsbruck","Klagenfurt","Villach","Wels","Sankt Pölten","Dornbirn"],
+      "Belgium": ["Brussels","Antwerp","Ghent","Charleroi","Liège","Bruges","Namur","Leuven","Mons","Aalst"],
+      "Czech Republic": ["Prague","Brno","Ostrava","Pilsen","Liberec","Olomouc","České Budějovice","Hradec Králové","Ústí nad Labem","Pardubice"],
+      "Denmark": ["Copenhagen","Aarhus","Odense","Aalborg","Frederiksberg","Esbjerg","Randers","Kolding","Horsens","Vejle"],
+      "France": ["Paris","Marseille","Lyon","Toulouse","Nice","Nantes","Strasbourg","Montpellier","Bordeaux","Lille","Rennes","Reims","Saint-Étienne","Toulon","Le Havre","Grenoble","Dijon","Angers","Villeurbanne","Le Mans"],
+      "Germany": ["Berlin","Hamburg","Munich","Cologne","Frankfurt","Stuttgart","Düsseldorf","Leipzig","Dortmund","Essen","Bremen","Dresden","Hanover","Nuremberg","Duisburg","Bochum","Wuppertal","Bielefeld","Bonn","Münster"],
+      "Hungary": ["Budapest","Debrecen","Szeged","Miskolc","Pécs","Győr","Nyíregyháza","Kecskemét","Székesfehérvár","Szombathely"],
+      "Italy": ["Rome","Milan","Naples","Turin","Palermo","Genoa","Bologna","Florence","Bari","Catania","Venice","Verona","Messina","Padua","Trieste"],
+      "Luxembourg": ["Luxembourg City","Esch-sur-Alzette","Dudelange","Schifflange","Bettembourg","Pétange","Ettelbruck","Diekirch","Strassen","Bertrange"],
+      "Netherlands": ["Amsterdam","Rotterdam","The Hague","Utrecht","Eindhoven","Tilburg","Groningen","Almere","Breda","Nijmegen"],
+      "Poland": ["Warsaw","Kraków","Łódź","Wrocław","Poznań","Gdańsk","Szczecin","Bydgoszcz","Lublin","Katowice"],
+      "Spain": ["Madrid","Barcelona","Valencia","Seville","Zaragoza","Málaga","Murcia","Palma","Las Palmas","Bilbao"],
+      "Sweden": ["Stockholm","Gothenburg","Malmö","Uppsala","Västerås","Örebro","Linköping","Helsingborg","Jönköping","Norrköping"],
+      "Switzerland": ["Zurich","Geneva","Basel","Bern","Lausanne","Winterthur","Lucerne","St. Gallen","Lugano","Biel/Bienne"]
+    };
+
+    function populateCountries() {
+      const countrySelect = document.getElementById('team_country');
+      const sorted = Object.keys(citiesByCountry).sort();
+      sorted.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country;
+        option.textContent = country;
+        countrySelect.appendChild(option);
+      });
+    }
+    function updateCities() {
+      const countrySelect = document.getElementById('team_country');
+      const citySelect    = document.getElementById('team_city');
+      const otherCityDiv  = document.getElementById('other_city_container');
+      citySelect.innerHTML = '<option value="">Select City</option>';
+      otherCityDiv.innerHTML = '';
+
+      const selectedCountry = countrySelect.value;
+      if (selectedCountry && citiesByCountry[selectedCountry]) {
+        let cityList = citiesByCountry[selectedCountry].slice().sort();
+        cityList.forEach(city => {
+          const opt = document.createElement('option');
+          opt.value = city;
+          opt.textContent = city;
+          citySelect.appendChild(opt);
+        });
+        const otherOpt = document.createElement('option');
+        otherOpt.value = 'Other';
+        otherOpt.textContent = 'Other / Custom';
+        citySelect.appendChild(otherOpt);
+        citySelect.disabled = false;
+      } else {
+        citySelect.disabled = true;
+      }
+    }
+    function handleCityChange() {
+      const citySelect   = document.getElementById('team_city');
+      const otherCityDiv = document.getElementById('other_city_container');
+      otherCityDiv.innerHTML = '';
+      if (citySelect.value === 'Other') {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id   = 'city_other';
+        input.className = 'form-control';
+        input.placeholder = 'Хотын нэр оруулах';
+        input.required = true;
+        otherCityDiv.appendChild(input);
+      }
+    }
+    function updateLocation() {
+      const countrySelect = document.getElementById('team_country');
+      const citySelect    = document.getElementById('team_city');
+      const locationField = document.getElementById('team_location');
+      let finalCity = citySelect.value;
+      if (finalCity === 'Other') {
+        const userCity = document.getElementById('city_other');
+        if (userCity && userCity.value.trim() !== '') {
+          finalCity = userCity.value.trim();
+        } else {
+          finalCity = '';
+        }
+      }
+      locationField.value = finalCity ? `${finalCity}, ${countrySelect.value}` : countrySelect.value;
+    }
+
+    function validateEmail(fieldName) {
+      const emailField = document.getElementsByName(fieldName)[0];
+      const value = emailField.value.trim();
+      const errorDiv = emailField.parentNode.querySelector(".error-message") || createErrorDiv(emailField.parentNode);
+
+      // First check if it's empty
+      if (value === '') {
+        errorDiv.textContent = "Имэйл хаяг оруулна уу";
+        emailField.style.border = "1px solid var(--tblr-danger)";
+        return false;
+      }
+      
+      // Special check for "admin" - do this before email format validation
+      if (fieldName === "account_email" && value.toLowerCase() === "admin") {
+        errorDiv.textContent = "Энэ имэйл хаягийг ашиглах боломжгүй";
+        emailField.style.border = "1px solid var(--tblr-danger)";
+        return false;
+      }
+      
+      // Then check email format
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailPattern.test(value)) {
+        errorDiv.textContent = "Зөв имэйл хаяг оруулна уу";
+        emailField.style.border = "1px solid var(--tblr-danger)";
+        return false;
+      }
+
+      errorDiv.textContent = "";
+      emailField.style.border = "";
+      return true;
+    }
+
+    function checkAccountEmail() {
+      const emailField = document.getElementsByName("account_email")[0];
+      const email = emailField.value.trim();
+      let errorElement = emailField.parentNode.querySelector('.error-message');
+      if (!errorElement) {
+        errorElement = document.createElement("div");
+        errorElement.classList.add("error-message");
+        emailField.parentNode.appendChild(errorElement);
+      }
+      
+      // Skip server check if email is not valid
+      if (!validateEmail("account_email")) {
+        accountEmailValid = false;
+        return;
+      }
+      
+      if (email.length === 0) {
+        errorElement.textContent = "";
+        accountEmailValid = true;
+        return;
+      }
+      
+      // Set loading state
+      errorElement.textContent = "Шалгаж байна...";
+      
+      fetch("check_email.php?email=" + encodeURIComponent(email))
+        .then(response => response.json())
+        .then(data => {
+          if (data.exists) {
+            errorElement.textContent = "Энэ имэйлээр бүртгэл хэдийнээ үүссэн байна. Өөр имэйл ашиглана уу.";
+            emailField.style.border = "1px solid var(--tblr-danger)";
+            accountEmailValid = false;
+          } else {
+            errorElement.textContent = "";
+            emailField.style.border = "";
+            accountEmailValid = true;
+          }
+        })
+        .catch(error => {
+          console.error("Error checking email:", error);
+          errorElement.textContent = "Сервертэй холбогдоход алдаа гарлаа. Дахин оролдоно уу.";
+        });
+    }
+
+    function validatePassword(str) {
+      const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+      return pattern.test(str);
+    }
+    function validateRequiredField(field) {
+      const value = field.value.trim();
+      const errorDiv = field.parentNode.querySelector(".error-message") || createErrorDiv(field.parentNode);
+      if (value === '') {
+        errorDiv.textContent = "Энэ талбарыг заавал бөглөх шаардлагатай.";
+        field.style.border = "1px solid var(--tblr-danger)";
+        return false;
+      }
+      errorDiv.textContent = "";
+      field.style.border = "";
+      return true;
+    }
+
+    function updateAgeCategory() {
+      const genderSelect = document.getElementById('team_gender');
+      const container    = document.getElementById('age-category-container');
+      if (genderSelect.value === "Эрэгтэй") {
+        container.innerHTML = `
+          <label class="form-label required">Насны ангилал</label>
+          <select name="team_age_category" class="form-select" required>
+            <option value="">Сонгох</option>
+            <option value="Эрэгтэй -35">Эрэгтэй -35</option>
+            <option value="Эрэгтэй 35+">Эрэгтэй 35+</option>
+          </select>
+        `;
+      } else {
+        container.innerHTML = "";
+      }
+    }
+
+    function addPlayer() {
+      const container = document.getElementById('players-container');
+      const playerDiv = document.createElement('div');
+      playerDiv.className = 'player-section';
+
+      let html = `<div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="m-0"><i class="ti ti-user me-2"></i>Тоглогч ${playerIndex + 1}</h3>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="removePlayer(this)">
+                      <i class="ti ti-trash me-1"></i>Устгах
+                    </button>
+                  </div>`;
+      
+      html += `<div class="row">
+                 <div class="col-md-6 mb-3">
+                   <label class="form-label required">Овог, нэр</label>
+                   <input type="text" name="player_name_${playerIndex}" class="form-control" required>
+                   <div class="error-message"></div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                   <label class="form-label required">Төрсөн огноо</label>
+                   <input type="text" name="player_dob_${playerIndex}" class="form-control" placeholder="DD/MM/YYYY" required>
+                   <div class="error-message"></div>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="col-md-6 mb-3">
+                   <label class="form-label required">Хувийн дугаар</label>
+                   <input type="text" name="player_id_${playerIndex}" class="form-control" required>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                   <label class="form-label required">Спортын зэрэг</label>
+                   <select name="player_rank_${playerIndex}" class="form-select" required>
+                     <option value="">Сонгох</option>
+                     <option value="Спортын дэд мастер">Спортын дэд мастер</option>
+                     <option value="Спортын мастер">Спортын мастер</option>
+                     <option value="Олон улсын хэмжээний мастер">Олон улсын хэмжээний мастер</option>
+                     <option value="Бусад">Бусад</option>
+                     <option value="Байхгүй">Байхгүй</option>
+                   </select>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="col-md-6 mb-3">
+                   <label class="form-label required">Биеийн өндөр (см)</label>
+                   <input type="number" name="player_height_${playerIndex}" class="form-control" required>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                   <label class="form-label required">Тоглох байрлал</label>
+                   <select name="player_position_${playerIndex}" class="form-select" required>
+                     <option value="">Сонгох</option>
+                     <option value="Point Guard">Point Guard</option>
+                     <option value="Shooting Guard">Shooting Guard</option>
+                     <option value="Small Forward">Small Forward</option>
+                     <option value="Power Forward">Power Forward</option>
+                     <option value="Center">Center</option>
+                     <option value="Bench Player">Bench Player</option>
+                   </select>
+                 </div>
+               </div>`;
+
+      playerDiv.innerHTML = html;
+      container.appendChild(playerDiv);
+      playerIndex++;
+      
+      // Initialize the date input
+      setupDateInputs();
+    }
+
+    function removePlayer(button) {
+      const playerSection = button.closest('.player-section');
+      if (playerSection) {
+        playerSection.remove();
+        
+        // After removing a player, update all the remaining player numbers
+        const playerSections = document.querySelectorAll('.player-section');
+        playerSections.forEach((section, index) => {
+          // Update the displayed player number in the heading
+          const heading = section.querySelector('h3');
+          if (heading) {
+            heading.textContent = `Тоглогч ${index + 1}`;
+          }
+          
+          // Update the form field names to match the new index
+          section.querySelectorAll('input, select').forEach(field => {
+            const name = field.getAttribute('name');
+            if (name) {
+              const newName = name.replace(/_\d+$/, `_${index}`);
+              field.setAttribute('name', newName);
+              
+              // Also update id attribute if it exists and follows the same pattern
+              const id = field.getAttribute('id');
+              if (id && id.match(/_\d+$/)) {
+                const newId = id.replace(/_\d+$/, `_${index}`);
+                field.setAttribute('id', newId);
+              }
+            }
+          });
+        });
+        
+        // Reset the playerIndex to match the current number of players
+        playerIndex = playerSections.length;
+      }
+    }
+
+    // Function to validate name fields (Coach, Captain, Player)
+    function validateNameField(field, fieldLabel) {
+      const value = field.value.trim();
+      const errorDiv = field.parentNode.querySelector(".error-message") || createErrorDiv(field.parentNode);
+      // Regex: Allows Unicode letters, spaces, hyphens, periods. Length 2-50.
+      // Note: \p{L} support in JS regex can vary, this is a common way to approximate
+      const namePattern = /^[\p{L}\s\-.]{2,50}$/u;
+
+      if (value === '') {
+        errorDiv.textContent = fieldLabel + " оруулна уу.";
+        field.style.border = "1px solid var(--tblr-danger)";
+        return false;
+      } else if (!namePattern.test(value)) {
+        errorDiv.textContent = fieldLabel + " зөвхөн үсэг, зай, зураас, цэг агуулж болно (2-50 тэмдэгт).";
+        field.style.border = "1px solid var(--tblr-danger)";
+        return false;
+      } else {
+        errorDiv.textContent = "";
+        field.style.border = "";
+        return true;
+      }
+    }
+
+    function validateAllDates() {
+      let allDatesValid = true;
+      const dateInputs = document.querySelectorAll('input[name^="player_dob_"]');
+      
+      dateInputs.forEach(input => {
+        const textInput = input.closest('.date-input-group')?.querySelector('.text-date-input');
+        if (textInput) {
+          if (!validateTextDate(textInput, input)) {
+            allDatesValid = false;
+          }
+        }
+      });
+      
+      return allDatesValid;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize country & city selectors
+      populateCountries();
+      populatePhonePrefixes();
+      
+      // Add event listeners for country and city selection
+      document.getElementById('team_country').addEventListener('change', updateCities);
+      document.getElementById('team_city').addEventListener('change', handleCityChange);
+      document.getElementById('phone_prefix').addEventListener('change', updatePhonePrefix);
+      
+      // Initialize team gender selector
+      document.getElementById('team_gender').addEventListener('change', updateAgeCategory);
+      
+      // Add one player by default
+      addPlayer();
+      
+      // Toggle password visibility
+      document.getElementById('toggle_password').addEventListener('click', function() {
+        const passwordField = document.getElementById('account_password');
+        const eyeIcon = document.getElementById('eye_icon_password');
+        
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          eyeIcon.classList.remove('ti-eye');
+          eyeIcon.classList.add('ti-eye-off');
+        } else {
+          passwordField.type = 'password';
+          eyeIcon.classList.remove('ti-eye-off');
+          eyeIcon.classList.add('ti-eye');
+        }
+      });
+      
+      document.getElementById('toggle_password_confirm').addEventListener('click', function() {
+        const passwordField = document.getElementById('account_password_confirm');
+        const eyeIcon = document.getElementById('eye_icon_password_confirm');
+        
+        if (passwordField.type === 'password') {
+          passwordField.type = 'text';
+          eyeIcon.classList.remove('ti-eye');
+          eyeIcon.classList.add('ti-eye-off');
+        } else {
+          passwordField.type = 'password';
+          eyeIcon.classList.remove('ti-eye-off');
+          eyeIcon.classList.add('ti-eye');
+        }
+      });
+      
+      // Form validation
+      const form = document.getElementById('registration-form');
+      
+      // On blur => phone
+      const phoneField = document.getElementById('contact_phone_input');
+      phoneField.addEventListener('blur', () => validatePhone());
+      
+      // Email validation - only on blur
+      const contactEmailField = document.getElementsByName("contact_email")[0];
+      contactEmailField.addEventListener("blur", function() {
+        validateEmail("contact_email");
+      });
+      
+      // Set up validation handlers for specific fields
+      document.querySelectorAll('input[name="account_email"]').forEach(field => {
+        field.addEventListener('blur', function(e) {
+          // First check if the value is "admin"
+          const value = field.value.trim().toLowerCase();
+          const errorDiv = field.parentNode.querySelector(".error-message") || createErrorDiv(field.parentNode);
+         
+          if (value === "admin") {
+            errorDiv.textContent = "Энэ имэйл хаягийг ашиглах боломжгүй";
+            field.style.border = "1px solid var(--tblr-danger)";
+            accountEmailValid = false;
+            return;
+          }
+          
+          // Then validate as normal
+          const isValidFormat = validateEmail("account_email");
+          if (isValidFormat) {
+            checkAccountEmail();
+          }
+        });
+      });
+      
+      // On blur => required fields
+      document.querySelectorAll('[required]').forEach(field => {
+        field.addEventListener('blur', () => validateRequiredField(field));
+      });
+      
+      // On blur => password
+      const passField = document.getElementsByName("account_password")[0];
+      const confField = document.getElementsByName("account_password_confirm")[0];
+      passField.addEventListener('blur', function() {
+        if (!validatePassword(this.value)) {
+          const err = this.parentNode.querySelector('.error-message') || createErrorDiv(this.parentNode);
+          err.textContent = "Нууц үг хамгийн багадаа 8 тэмдэгт, дор хаяж нэг үсэг, нэг тоо болон нэг тусгай тэмдэгт агуулсан байх ёстой.";
+          this.style.border = "1px solid var(--tblr-danger)";
+        } else {
+          this.style.border = "";
+          const err = this.parentNode.querySelector('.error-message');
+          if (err) err.textContent = "";
+        }
+      });
+      
+      confField.addEventListener('blur', function() {
+        if (this.value !== passField.value) {
+          const err = this.parentNode.querySelector('.error-message') || createErrorDiv(this.parentNode);
+          err.textContent = "Нууц үг тохирохгүй байна.";
+          this.style.border = "1px solid var(--tblr-danger)";
+        } else {
+          this.style.border = "";
+          const err = this.parentNode.querySelector('.error-message');
+          if (err) err.textContent = "";
+        }
+      });
+      
+      // Initialize date inputs
+      setupDateInputs();
+      
+      // Add blur validation for Coach Name
+      const coachField = document.querySelector('input[name="coach_name"]');
+      if (coachField) {
+        coachField.addEventListener('blur', function() {
+          validateNameField(this, 'Дасгалжуулагчийн нэр');
+        });
+      }
+
+      // Add blur validation for Captain Name
+      const captainField = document.querySelector('input[name="captain_name"]');
+      if (captainField) {
+        captainField.addEventListener('blur', function() {
+          validateNameField(this, 'Ахлагчийн нэр');
+        });
+      }
+      
+      // Add blur validation for dynamically added Player Names
+      const playersContainer = document.getElementById('players-container');
+      playersContainer.addEventListener('blur', function(event) {
+          if (event.target && event.target.matches('input[name^="player_name_"]')) {
+              validateNameField(event.target, 'Тоглогчийн овог, нэр');
+          }
+      }, true); // Use capture phase to catch blur on dynamically added elements
+      
+      // Form submission
+      form.addEventListener('submit', function(e) {
+        // Update the location field before submission
+        updateLocation();
+        
+        // Validate the location field to ensure it meets requirements
+        const locationField = document.getElementById('team_location');
+        if (!locationField.value || locationField.value.length < 2 || locationField.value.length > 100) {
+          e.preventDefault();
+          alert("Байршил 2-100 тэмдэгт байх ёстой. Хот болон Улсыг зөв сонгоно уу.");
+          return false;
+        }
+        
+        // Get the submit button
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonHTML = submitButton.innerHTML; // Store original content
+
+        // Disable button and show processing state IMMEDIATELY
+        submitButton.disabled = true;
+        submitButton.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status"></span>Бүртгэж байна...`;
+        
+        // Clear existing errors
+        document.querySelectorAll('.error-message').forEach(err => {
+          err.textContent = '';
+        });
+        
+        // Validate form
+        let formIsValid = true;
+        
+        // Check if email is valid (for account login)
+        const emailValid = validateEmail("account_email");
+        if (!emailValid || !accountEmailValid) {
+          formIsValid = false;
+        }
+        
+        // Check if contact email is valid
+        const contactEmailValid = validateEmail("contact_email");
+        if (!contactEmailValid) {
+          formIsValid = false;
+        }
+        
+        // Check password
+        const passwordField = document.getElementsByName("account_password")[0];
+        const passwordConfirmField = document.getElementsByName("account_password_confirm")[0];
+        if (!validatePassword(passwordField.value)) {
+          const err = passwordField.parentNode.querySelector('.error-message') || createErrorDiv(passwordField.parentNode);
+          err.textContent = "Нууц үг хамгийн багадаа 8 тэмдэгт, дор хаяж нэг үсэг, нэг тоо болон нэг тусгай тэмдэгт агуулсан байх ёстой.";
+          passwordField.style.border = "1px solid var(--tblr-danger)";
+          formIsValid = false;
+        } else {
+          passwordField.style.border = "";
+          const err = passwordField.parentNode.querySelector('.error-message');
+          if (err) err.textContent = "";
+        }
+        
+        // Check if passwords match
+        if (passwordField.value !== passwordConfirmField.value) {
+          const err = passwordConfirmField.parentNode.querySelector('.error-message') || createErrorDiv(passwordConfirmField.parentNode);
+          err.textContent = "Нууц үг тохирохгүй байна.";
+          passwordConfirmField.style.border = "1px solid var(--tblr-danger)";
+          formIsValid = false;
+        } else {
+          passwordConfirmField.style.border = "";
+          const err = passwordConfirmField.parentNode.querySelector('.error-message');
+          if (err) err.textContent = "";
+        }
+        
+        // Re-validate required fields including names on submit
+        document.querySelectorAll('[required]').forEach(field => {
+            let isFieldValid = true;
+            if (field.name === 'coach_name') {
+                isFieldValid = validateNameField(field, 'Дасгалжуулагчийн нэр');
+            } else if (field.name === 'captain_name') {
+                isFieldValid = validateNameField(field, 'Ахлагчийн нэр');
+            } else if (field.name.startsWith('player_name_')) {
+                isFieldValid = validateNameField(field, 'Тоглогчийн овог, нэр');
+            } else if (field.type !== 'email' && field.type !== 'password' && !field.closest('.date-input-group')) {
+                // Use basic required validation for other fields not specifically handled
+                isFieldValid = validateRequiredField(field); 
+            }
+            if (!isFieldValid) {
+                formIsValid = false;
+            }
+        });
+        
+        // Validate date inputs
+        const dateValid = validateAllDates();
+        if (!dateValid) {
+          formIsValid = false;
+        }
+        
+        // Validate location and update hidden field
+        updateLocation();
+        if (!document.getElementById('team_location').value) {
+          const citySelect = document.getElementById('team_city');
+          const countrySelect = document.getElementById('team_country');
+          
+          if (!countrySelect.value) {
+            const errorDiv = countrySelect.parentNode.querySelector('.error-message') || createErrorDiv(countrySelect.parentNode);
+            errorDiv.textContent = "Улс сонгоно уу";
+            countrySelect.style.border = "1px solid var(--tblr-danger)";
+            formIsValid = false;
+          }
+          
+          if (!citySelect.value) {
+            const errorDiv = citySelect.parentNode.querySelector('.error-message') || createErrorDiv(citySelect.parentNode);
+            errorDiv.textContent = "Хот сонгоно уу";
+            citySelect.style.border = "1px solid var(--tblr-danger)";
+            formIsValid = false;
+          }
+        }
+        
+        // Check if players exist
+        if (playersContainer.children.length === 0) {
+          const playersError = document.getElementById('players-error');
+          playersError.textContent = "Доод тал нь нэг тоглогч оруулна уу";
+          formIsValid = false;
+        } else {
+          document.getElementById('players-error').textContent = "";
+        }
+        
+        // Validate phone
+        const phoneValid = validatePhone();
+        if (!phoneValid) {
+          formIsValid = false;
+        }
+        
+        if (!formIsValid) {
+          e.preventDefault();
+          // Find first error element and scroll to it
+          const firstError = document.querySelector('.error-message:not(:empty)');
+          if (firstError) {
+            const scrollTarget = firstError.closest('.card, .player-section') || firstError;
+            scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          // Re-enable button on validation failure
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalButtonHTML;
+        } else {
+          // Check reCAPTCHA only if form is otherwise valid
+          const recaptchaResponse = grecaptcha.getResponse();
+          if (!recaptchaResponse) {
+            alert("reCAPTCHA баталгаажуулалтыг бөглөнө үү");
+            document.querySelector('.g-recaptcha').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            e.preventDefault(); // Prevent submission if reCAPTCHA missing
+            
+            // Re-enable button on reCAPTCHA failure
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonHTML;
+          } else {
+            // All valid and reCAPTCHA done: DO NOTHING here, allow default submission to proceed.
+            // Button remains disabled with processing state.
+          }
+        }
+      });
+      
+      // Ensure error message divs exist for coach and captain
+      if(coachField && !coachField.parentNode.querySelector('.error-message')) {
+          createErrorDiv(coachField.parentNode);
+      }
+      if(captainField && !captainField.parentNode.querySelector('.error-message')) {
+          createErrorDiv(captainField.parentNode);
+      }
+    });
+  </script>
+</head>
+<body class="theme-light">
+  <div class="page page-center py-4">
+    <div class="container container-custom">
+      <div class="d-flex flex-column align-items-center position-relative mb-4">
+        <h1 class="h2 mb-3">Европ дахь монголчуудын волейболын аварга</h1>
+        <a href="index.html" class="btn btn-outline-primary position-absolute top-0 end-0 me-2 mt-2">
+          <i class="ti ti-arrow-left me-2"></i>Буцах
+        </a>
+      </div>
+      
+      <form id="registration-form" accept-charset="UTF-8" action="process_registration.php" method="POST">
+        <!-- CSRF Token field - we'll fill this via JS -->
+        <input type="hidden" name="csrf_token" id="csrf_token" value="">
+        <!-- Team Info -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="ti ti-users me-2"></i>Багийн мэдээлэл</h2>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label class="form-label required">Багийн нэр</label>
+              <input type="text" name="team_name" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label required">Байршил</label>
+              <input type="hidden" id="team_location" name="team_location">
+              <div class="row g-2">
+                <div class="col-sm-6">
+                  <select id="team_country" class="form-select" required>
+                    <option value="">Улс сонгох</option>
+                  </select>
+                </div>
+                <div class="col-sm-6">
+                  <select id="team_city" class="form-select" disabled required>
+                    <option value="">Хот сонгох</option>
+                  </select>
+                  <div id="other_city_container" class="mt-2"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-sm-6 mb-3">
+                <label class="form-label required">Багийн хүйсний ангилал</label>
+                <select name="team_gender" id="team_gender" class="form-select" required>
+                  <option value="">Сонгох</option>
+                  <option value="Эрэгтэй">Эрэгтэй</option>
+                  <option value="Эмэгтэй">Эмэгтэй</option>
+                </select>
+              </div>
+              <div class="col-sm-6 mb-3" id="age-category-container"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Players -->
+        <div class="card mt-4">
+          <div class="card-header">
+            <h2 class="card-title"><i class="ti ti-user-plus me-2"></i>Тоглогчдын мэдээлэл</h2>
+          </div>
+          <div class="card-body">
+            <div id="players-container"></div>
+            <div id="players-error" class="error-message"></div>
+            <div class="mt-3 text-center">
+              <button type="button" class="btn btn-primary" onclick="addPlayer()">
+                <i class="ti ti-plus me-1"></i>Тоглогч нэмэх
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Coach, Captain -->
+        <div class="card mt-4">
+          <div class="card-header">
+            <h2 class="card-title"><i class="ti ti-license me-2"></i>Дасгалжуулагч, Ахлагч</h2>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6 mb-3">
+                <label class="form-label required">Дасгалжуулагчийн овог, нэр</label>
+                <input type="text" name="coach_name" class="form-control" required>
+                <div class="error-message"></div>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label class="form-label required">Ахлагчийн овог, нэр</label>
+                <input type="text" name="captain_name" class="form-control" required>
+                <div class="error-message"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contact -->
+        <div class="card mt-4">
+          <div class="card-header">
+            <h2 class="card-title"><i class="ti ti-phone me-2"></i>Холбоо барих</h2>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6 mb-3">
+                <label class="form-label required">Утасны дугаар</label>
+                <div class="phone-field-container">
+                  <div class="input-group">
+                    <select id="phone_prefix" class="form-select"></select>
+                    <input type="tel" id="contact_phone_input" name="contact_phone"
+                          class="form-control" pattern="^\d+$"
+                          title="Утасны дугаар зөвхөн цифрүүдээс тогтсон байх ёстой" required>
+                  </div>
+                  <div id="phone_error_container" class="error-message"></div>
+                </div>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label class="form-label required">Имэйл хаяг</label>
+                <input type="email" name="contact_email" class="form-control" required>
+                <div class="error-message"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+            
+          
+            
+            
+            
+            
+            <div class="form-footer">
+              <button type="button" class="btn btn-danger me-auto"
+                onclick="if(confirm('Бүх мэдээллийг устгах болно. Та үргэлжлүүлэхдээ итгэлтэй байна уу?')) {
+                  document.getElementById('registration-form').reset();
+                  document.getElementById('players-container').innerHTML = '';
+                  playerIndex = 0;
+                }">
+                <i class="ti ti-trash me-1"></i>Арилгах
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="ti ti-device-floppy me-1"></i>Бүртгүүлэх
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabler Core JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+</body>
+</html>
+
