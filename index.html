@@ -668,6 +668,10 @@
                    <label class="form-label required">Тоглох байрлал</label>
                    <input type="text" name="player_position_${playerIndex}" class="form-control" required>
                   </div>
+                  <div class="col-md-12 mb-3">
+                      <label class="form-label">Зураг нэмэх (Optional)</label>
+                      <input type="file" name="player_image_${playerIndex}" class="form-control" accept="image/*">
+                  </div>
                </div>`;
 
       playerDiv.innerHTML = html;
