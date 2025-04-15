@@ -1071,9 +1071,8 @@
         <h1 class="h2 mb-3">Европ дахь монголчуудын волейболын аварга</h1>
       </div>
       
-      <form id="registration-form" accept-charset="UTF-8" action="process_registration.php" method="POST">
-        <!-- CSRF Token field - we'll fill this via JS -->
-        <input type="hidden" name="csrf_token" id="csrf_token" value="">
+      <form id="registration-form" name="register" method="POST" data-netlify="true" accept-charset="UTF-8">
+        <input type="hidden" name="form-name" value="register" />
         <!-- Team Info -->
         <div class="card">
           <div class="card-header">
